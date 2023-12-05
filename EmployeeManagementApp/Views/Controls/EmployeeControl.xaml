@@ -3,28 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeManagementApp.Views.Controls.EmployeeControl">
     
-    <VerticalStackLayout Spacing="15" Margin="10, 20, 20, 0">
+    <VerticalStackLayout Spacing="12" Margin="10, 20, 20, 0">
         <Frame Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="First Name" VerticalOptions="Center" WidthRequest="100"></Label>
-                <Entry x:Name="entryFirstName" VerticalOptions="Center" WidthRequest="150">
+                <Label Text="First Name: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryFirstName" VerticalOptions="Center" WidthRequest="250">
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
         <Frame Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Last Name" VerticalOptions="Center" WidthRequest="100"></Label>
-                <Entry x:Name="entryLastName" VerticalOptions="Center" WidthRequest="150">
+                <Label Text="Last Name: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryLastName" VerticalOptions="Center" WidthRequest="250">
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
         <Frame Padding="10,2,10,2">
             <HorizontalStackLayout>
-                <Label Text="Phone Number" VerticalOptions="Center" WidthRequest="100"></Label>
-                <Entry x:Name="entryPhoneNumber" VerticalOptions="Center" WidthRequest="150">
+                <Label Text="Phone Number: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryPhoneNumber" VerticalOptions="Center" WidthRequest="250">
                 </Entry>
             </HorizontalStackLayout>
         </Frame>
+        <Frame Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Department: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryDepartment" VerticalOptions="Center" WidthRequest="250">
+                </Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Street: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryStreet" VerticalOptions="Center" WidthRequest="250">
+                </Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="City: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryCity" VerticalOptions="Center" WidthRequest="250">
+                </Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="State: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryState" VerticalOptions="Center" WidthRequest="250">
+                </Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame Padding="10,2,10,2">
+            <HorizontalStackLayout>
+                <Label Text="Zip: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryZip" VerticalOptions="Center" WidthRequest="250">
+                </Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame Padding="10,2,10,2">
+                <HorizontalStackLayout>
+                <Label Text="Country: " VerticalOptions="Center" WidthRequest="105"></Label>
+                <Entry x:Name="entryCountry" VerticalOptions="Center" WidthRequest="250">
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
         <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"></Button>
         <Button x:Name="btnDelete" Text="Delete" Clicked="btnDelete_Clicked" x:FieldModifier="public"></Button>
         <Button x:Name="btnCancel" Text="Cancel" Clicked="btnCancel_Clicked"></Button>

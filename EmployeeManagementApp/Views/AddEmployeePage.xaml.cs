@@ -15,11 +15,27 @@ public partial class AddEmployeePage : ContentPage
 
     private void employeeCtrl_OnSave(object sender, EventArgs e)
     {
+        var department = new Department { DepartmentName = employeeCtrl.department };
+        department = EmployeeRepository.CheckDepartmentExists(department);
+
+        var address = new Address
+        {
+            Street = employeeCtrl.street,
+            City = employeeCtrl.city,
+            State = employeeCtrl.state,
+            Zip = employeeCtrl.zip,
+            Country = employeeCtrl.country
+        };
+
+        address = EmployeeRepository.CheckAddressExists(address);
+
         EmployeeRepository.AddEmployee(new Model.Employee
         {
             FirstName = employeeCtrl.firstName, 
             LastName = employeeCtrl.lastName,
-            PhoneNumber = employeeCtrl.phoneNumber
+            PhoneNumber = employeeCtrl.phoneNumber,
+            DepartmentId = department.DepartmentId,
+            AddressId = address.AddressId,
         });
 
         Shell.Current.GoToAsync("..");

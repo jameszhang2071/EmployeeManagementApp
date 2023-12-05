@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Android.Content.PM;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,12 +16,9 @@ namespace EmployeeManagementApp.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-
-        // Foreign Key
         public int DepartmentId { get; set; }
-
-        // Foreign Key
         public int AddressId { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; }}
 
     }
 }

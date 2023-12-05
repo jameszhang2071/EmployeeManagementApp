@@ -19,7 +19,7 @@
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding FirstName}"
+                    <TextCell Text="{Binding FullName}"
                       Detail="{Binding PhoneNumber}"
                       >
                     </TextCell>

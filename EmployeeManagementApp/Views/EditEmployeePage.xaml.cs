@@ -23,6 +23,34 @@ public partial class EditEmployeePage : ContentPage
 				employeeCtrl.firstName = employee.FirstName;
 				employeeCtrl.lastName = employee.LastName;
 				employeeCtrl.phoneNumber = employee.PhoneNumber;
+                var department = EmployeeRepository.GetDepartmentById(employee.DepartmentId);
+                if (department != null)
+                {
+                    employeeCtrl.department = department.DepartmentName;
+                }
+                else
+                {
+                    employeeCtrl.department = string.Empty;
+                }
+
+                var address = EmployeeRepository.GetAddressById(employee.AddressId);
+
+                if (address != null)
+                {
+                    employeeCtrl.street = address.Street;
+                    employeeCtrl.city = address.City;
+                    employeeCtrl.state = address.State;
+                    employeeCtrl.zip = address.Zip;
+                    employeeCtrl.country = address.Country;
+                }
+                else
+                {
+                    employeeCtrl.street = string.Empty;
+                    employeeCtrl.city = string.Empty;
+                    employeeCtrl.state = string.Empty;
+                    employeeCtrl.zip = string.Empty;
+                    employeeCtrl.country = string.Empty;
+                }
 			}
 		}
 	}
@@ -32,8 +60,26 @@ public partial class EditEmployeePage : ContentPage
 		employee.FirstName = employeeCtrl.firstName;
         employee.LastName = employeeCtrl.lastName;
 		employee.PhoneNumber = employeeCtrl.phoneNumber;
+
+        var department = new Department { DepartmentName = employeeCtrl.department };
+        department = EmployeeRepository.CheckDepartmentExists(department);
+
+        var address = new Address
+        {
+            Street = employeeCtrl.street,
+            City = employeeCtrl.city,
+            State = employeeCtrl.state,
+            Zip = employeeCtrl.zip,
+            Country = employeeCtrl.country
+        };
+
+        address = EmployeeRepository.CheckAddressExists(address);
+
+        employee.DepartmentId = department.DepartmentId;
+        employee.AddressId = address.AddressId;
+
         EmployeeRepository.UpdateEmployee(employee);
-        //EmployeeRepository.UpdateEmployee(employee.EmployeeId, employee);
+
         Shell.Current.GoToAsync("..");
     }
 

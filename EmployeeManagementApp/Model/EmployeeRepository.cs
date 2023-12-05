@@ -6,23 +6,14 @@ namespace EmployeeManagementApp.Model
     public static class EmployeeRepository
     {
         private static readonly SQLiteConnection _database;
-
+        private const string _databaseName = "ROIEmployees.db3";
         static EmployeeRepository()
         {
-            _database = new SQLiteConnection(Path.Combine(FileSystem.AppDataDirectory, "employees.db3"));
-            _database.CreateTable<Employee>();
+            _database = new SQLiteConnection(Path.Combine(FileSystem.AppDataDirectory, _databaseName));
             _database.CreateTable<Department>();
             _database.CreateTable<Address>();
+            _database.CreateTable<Employee>();
         }
-
-        public static List<Employee> _employees = new List<Employee>()
-        {
-            new Employee() { EmployeeId = 1, FirstName="Test1", LastName="Last", PhoneNumber="1" },
-            new Employee() { EmployeeId = 2, FirstName="Test2", LastName="Last", PhoneNumber="2" },
-            new Employee() { EmployeeId = 3, FirstName="Test3", LastName="Last", PhoneNumber="3" },
-        };
-
-        //public static List<Employee> GetEmployees() => _employees;
 
         public static List<Employee> GetEmployees()
         {
@@ -31,58 +22,61 @@ namespace EmployeeManagementApp.Model
 
         public static Employee GetEmployeeById(int id)
         {
-            //var employee = _employees.FirstOrDefault(x => x.EmployeeId == id);
-
-            //if (employee != null)
-            //{
-            //    return new Employee 
-            //    { 
-            //        EmployeeId = employee.EmployeeId,
-            //        FirstName = employee.FirstName,
-            //        LastName = employee.LastName,
-            //        PhoneNumber = employee.PhoneNumber,
-            //    };
-            //}
-
-            //return null;
-
             return _database.Table<Employee>().FirstOrDefault(employee => employee.EmployeeId == id);
         }
 
-        //public static void UpdateEmployee(int employeeId, Employee employee)
+        public static Department GetDepartmentById(int id)
+        {
+            return _database.Table<Department>().FirstOrDefault(department => department.DepartmentId == id);
+        }
+
+        public static Address GetAddressById(int id)
+        {
+            return _database.Table<Address>().FirstOrDefault(address => address.AddressId == id);
+        }
+
         public static void UpdateEmployee(Employee employee)
         {
-            //if (employeeId != employee.EmployeeId) return;
-
-            //var employeeToUpdate = _employees.FirstOrDefault(x => x.EmployeeId == employeeId);
-
-            //if (employeeToUpdate != null)
-            //{
-            //    employeeToUpdate.FirstName = employee.FirstName;
-            //    employeeToUpdate.LastName = employee.LastName;
-            //    employeeToUpdate.PhoneNumber = employee.PhoneNumber;
-            //}
 
             _database.Update(employee);
         }
 
         public static void AddEmployee(Employee employee)
-        { 
-            //var maxId = _employees.Max(x => x.EmployeeId);
-            //employee.EmployeeId = maxId + 1;
-            //_employees.Add(employee);
-
+        {
             _database.Insert(employee);
         }
 
         public static void DeleteEmployee(int employeeId)
         {
-            //var employee = _employees.FirstOrDefault(x => x.EmployeeId == employeeId);
-            //if (employee != null)
-            //{
-            //    _employees.Remove(employee);
-            //}
             _database.Delete<Employee>(employeeId);
         }
+
+        // Helper methods to ensure related entities exist
+        public static Department CheckDepartmentExists(Department department)
+        {
+            if (department != null)
+            {
+                var existingDepartment = _database.Find<Department>(department.DepartmentId);
+                if (existingDepartment == null)
+                {
+                    _database.Insert(department);
+                }
+            }
+             return department;
+        }
+
+        public static Address CheckAddressExists(Address address)
+        {
+            if (address != null)
+            {
+                var existingAddress = _database.Find<Address>(address.AddressId);
+                if (existingAddress == null)
+                {
+                    _database.Insert(address);
+                }
+            }
+            return address;
+        }
+
     }
 }

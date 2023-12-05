@@ -17,39 +17,56 @@ public partial class EmployeeControl : ContentView
     }
 
 	public string firstName
-	{
-		get
-		{
-            return entryFirstName.Text;
-		}
-		set
-		{
-			entryFirstName.Text = value;
-		}
+    {
+        get => entryFirstName.Text;
+        set => entryFirstName.Text = value;
     }
 
     public string lastName
     {
-        get
-        {
-            return entryLastName.Text;
-        }
-        set
-        {
-            entryLastName.Text = value;
-        }
+        get => entryLastName.Text;
+        set => entryLastName.Text = value;
     }
 
     public string phoneNumber
     {
-        get
-        {
-            return entryPhoneNumber.Text;
-        }
-        set
-        {
-            entryPhoneNumber.Text = value;
-        }
+        get => entryPhoneNumber.Text;
+        set => entryPhoneNumber.Text = value;
+    }
+
+    public string department
+    {
+        get => entryDepartment.Text;
+        set => entryDepartment.Text = value;
+    }
+
+    public string street
+    {
+        get => entryStreet.Text;
+        set => entryStreet.Text = value;
+    }
+
+    public string city
+    {
+        get => entryCity.Text;
+        set => entryCity.Text = value;
+    }
+
+    public string state
+    {
+        get => entryState.Text;
+        set => entryState.Text = value;
+    }
+
+    public string zip
+    {
+        get => entryZip.Text;
+        set => entryZip.Text = value;
+    }
+    public string country
+    {
+        get => entryCountry.Text;
+        set => entryCountry.Text = value;
     }
 
     private void btnSave_Clicked(object sender, EventArgs e)
@@ -75,6 +92,12 @@ public partial class EmployeeControl : ContentView
         if (string.IsNullOrEmpty(entryPhoneNumber.Text) || !Regex.IsMatch(entryPhoneNumber.Text, pattern))
         {
             OnError?.Invoke(sender, "Invalid phone number!");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(entryZip.Text) || !Regex.IsMatch(entryZip.Text, @"^\d{4}$"))
+        {
+            OnError?.Invoke(sender, "Invalid Zip Code(4 digits)!");
             return;
         }
 
