@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EmployeeManagementApp.Views.Controls"
+             x:Class="EmployeeManagementApp.Views.AddEmployeePage"
+             Title="Add Employee">
+    
+    <controls:EmployeeControl x:Name="employeeCtrl"
+                         OnSave="employeeCtrl_OnSave"
+                         OnCancel="employeeCtrl_OnCancel"
+                         OnError="employeeCtrl_OnError"
+                         />
+</ContentPage>
