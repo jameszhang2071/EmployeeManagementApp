@@ -8,19 +8,15 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementApp.Model
 {
-    public class Employee
+    public class Address
     {
         [PrimaryKey, AutoIncrement]
-        public int EmployeeId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-
-        // Foreign Key
-        public int DepartmentId { get; set; }
-
-        // Foreign Key
         public int AddressId { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+        public string Country { get; set; }
 
     }
 }

@@ -1,12 +1,16 @@
 using EmployeeManagementApp.Model;
+using EmployeeManagementApp.Views.Controls;
 
 namespace EmployeeManagementApp.Views;
 
 public partial class AddEmployeePage : ContentPage
 {
-	public AddEmployeePage()
+
+    public AddEmployeePage()
 	{
 		InitializeComponent();
+        // Hide Delete Button in Add Employee page.
+        employeeCtrl.btnDelete.IsVisible = false;
     }
 
     private void employeeCtrl_OnSave(object sender, EventArgs e)

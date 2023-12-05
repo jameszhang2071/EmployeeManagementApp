@@ -20,7 +20,7 @@ public partial class EmployeeControl : ContentView
 	{
 		get
 		{
-			return entryFirstName.Text;
+            return entryFirstName.Text;
 		}
 		set
 		{

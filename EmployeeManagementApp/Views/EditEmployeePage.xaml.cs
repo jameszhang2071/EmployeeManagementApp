@@ -32,8 +32,8 @@ public partial class EditEmployeePage : ContentPage
 		employee.FirstName = employeeCtrl.firstName;
         employee.LastName = employeeCtrl.lastName;
 		employee.PhoneNumber = employeeCtrl.phoneNumber;
-
-		EmployeeRepository.UpdateEmployee(employee.EmployeeId, employee);
+        EmployeeRepository.UpdateEmployee(employee);
+        //EmployeeRepository.UpdateEmployee(employee.EmployeeId, employee);
         Shell.Current.GoToAsync("..");
     }
 
