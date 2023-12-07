@@ -12,6 +12,7 @@ namespace EmployeeManagementApp.Model
     {
 
         [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
     }

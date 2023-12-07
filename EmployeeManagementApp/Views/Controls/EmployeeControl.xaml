@@ -28,8 +28,14 @@
         <Frame Padding="10,2,10,2">
             <HorizontalStackLayout>
                 <Label Text="Department: " VerticalOptions="Center" WidthRequest="105"></Label>
-                <Entry x:Name="entryDepartment" VerticalOptions="Center" WidthRequest="250">
-                </Entry>
+                <!--<Entry x:Name="entryDepartment" VerticalOptions="Center" WidthRequest="250">
+                </Entry>-->
+                <Picker x:Name="pickerDepartments"
+                        Title="Select a deparment"
+                        ItemDisplayBinding="{Binding DepartmentName}"
+                        SelectedIndexChanged="pickerDepartments_SelectedIndexChanged"
+                    />
+                <Label x:Name="selectedDepartmentLabel" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Frame>
         <Frame Padding="10,2,10,2">

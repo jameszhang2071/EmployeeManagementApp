@@ -1,3 +1,5 @@
+using EmployeeManagementApp.Model;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 namespace EmployeeManagementApp.Views.Controls;
@@ -11,12 +13,15 @@ public partial class EmployeeControl : ContentView
     public event EventHandler<EventArgs> OnSave;
     public event EventHandler<EventArgs> OnDelete;
     public event EventHandler<EventArgs> OnCancel;
+
+    public List<Department> Departments { get; set; }
+
     public EmployeeControl()
 	{
 		InitializeComponent();
     }
 
-	public string firstName
+    public string firstName
     {
         get => entryFirstName.Text;
         set => entryFirstName.Text = value;
@@ -34,10 +39,10 @@ public partial class EmployeeControl : ContentView
         set => entryPhoneNumber.Text = value;
     }
 
-    public string department
+    public Department department
     {
-        get => entryDepartment.Text;
-        set => entryDepartment.Text = value;
+        get => (Department)pickerDepartments.SelectedItem;
+        set => pickerDepartments.SelectedItem = value;
     }
 
     public string street
@@ -112,5 +117,35 @@ public partial class EmployeeControl : ContentView
     private void btnDelete_Clicked(object sender, EventArgs e)
     {
         OnDelete?.Invoke(sender, e);
+    }
+
+    public void LoadDepartments(Department selectedDepartment)
+    {
+        Departments = EmployeeRepository.GetDepartments();
+        pickerDepartments.ItemsSource = Departments;
+        if (selectedDepartment != null)
+        {
+            pickerDepartments.SelectedItem = selectedDepartment.DepartmentId;
+            //selectedDepartmentLabel.Text = pickerDepartments.SelectedItem.ToString();
+        }
+        else
+        {
+            pickerDepartments.SelectedIndex = -1;
+        }
+        //pickerDepartments.ItemDisplayBinding = new Binding("DepartmentName");
+    }
+
+    private void pickerDepartments_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        //int selectedIndex = picker.SelectedIndex
+        if (picker.SelectedItem != null)
+        {
+            selectedDepartmentLabel.Text = $"Selected Department: {((Department)picker.SelectedItem).DepartmentName}";
+        }
+        else
+        {
+            selectedDepartmentLabel.Text = string.Empty;
+        }
     }
 }

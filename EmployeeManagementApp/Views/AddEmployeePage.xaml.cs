@@ -1,5 +1,6 @@
 using EmployeeManagementApp.Model;
 using EmployeeManagementApp.Views.Controls;
+using System.Collections.ObjectModel;
 
 namespace EmployeeManagementApp.Views;
 
@@ -11,12 +12,13 @@ public partial class AddEmployeePage : ContentPage
 		InitializeComponent();
         // Hide Delete Button in Add Employee page.
         employeeCtrl.btnDelete.IsVisible = false;
+        employeeCtrl.LoadDepartments(null);
     }
 
     private void employeeCtrl_OnSave(object sender, EventArgs e)
     {
-        var department = new Department { DepartmentName = employeeCtrl.department };
-        department = EmployeeRepository.CheckDepartmentExists(department);
+     
+        var department = employeeCtrl.department;
 
         var address = new Address
         {
@@ -34,7 +36,7 @@ public partial class AddEmployeePage : ContentPage
             FirstName = employeeCtrl.firstName, 
             LastName = employeeCtrl.lastName,
             PhoneNumber = employeeCtrl.phoneNumber,
-            DepartmentId = department.DepartmentId,
+            DepartmentId = department.Id,
             AddressId = address.AddressId,
         });
 

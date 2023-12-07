@@ -7,17 +7,49 @@ namespace EmployeeManagementApp.Model
     {
         private static readonly SQLiteConnection _database;
         private const string _databaseName = "ROIEmployees.db3";
+        private static string _databaseFile = Path.Combine(FileSystem.AppDataDirectory, _databaseName);
         static EmployeeRepository()
         {
-            _database = new SQLiteConnection(Path.Combine(FileSystem.AppDataDirectory, _databaseName));
+
+            //if (File.Exists(_databaseFile))
+            //{
+            //    File.Delete(_databaseFile);
+            //}
+
+            _database = new SQLiteConnection(_databaseFile);
             _database.CreateTable<Department>();
             _database.CreateTable<Address>();
             _database.CreateTable<Employee>();
+            PopulateDepartments();
         }
 
         public static List<Employee> GetEmployees()
         {
             return _database.Table<Employee>().ToList();
+        }
+
+        public static List<Department> GetDepartments()
+        {
+            return _database.Table<Department>().ToList();
+        }
+
+        // Pre populate department table
+        public static void PopulateDepartments()
+        {
+            var departments = new List<Department>
+            {
+                new Department { Id = 1, DepartmentId = 0, DepartmentName = "General" },
+                new Department { Id = 2, DepartmentId = 1, DepartmentName = "Information Communications Technology" },
+                new Department { Id = 3, DepartmentId = 2, DepartmentName = "Finance" },
+                new Department { Id = 4, DepartmentId = 3, DepartmentName = "Marketing" },
+                new Department { Id = 5, DepartmentId = 4, DepartmentName = "Human Resources" }
+            };
+            foreach (var department in departments)
+            {
+                // Check department exsits in Database or not, if not then insert into table.
+                CheckDepartmentExists(department);
+            }
+            //_database.InsertAll(departments);
         }
 
         public static Employee GetEmployeeById(int id)
@@ -27,7 +59,7 @@ namespace EmployeeManagementApp.Model
 
         public static Department GetDepartmentById(int id)
         {
-            return _database.Table<Department>().FirstOrDefault(department => department.DepartmentId == id);
+            return _database.Table<Department>().FirstOrDefault(department => department.Id == id);
         }
 
         public static Address GetAddressById(int id)
@@ -51,12 +83,12 @@ namespace EmployeeManagementApp.Model
             _database.Delete<Employee>(employeeId);
         }
 
-        // Helper methods to ensure related entities exist
+        // Helper methods to ensure department entities exist
         public static Department CheckDepartmentExists(Department department)
         {
             if (department != null)
             {
-                var existingDepartment = _database.Find<Department>(department.DepartmentId);
+                var existingDepartment = _database.Find<Department>(department.Id);
                 if (existingDepartment == null)
                 {
                     _database.Insert(department);
@@ -65,6 +97,7 @@ namespace EmployeeManagementApp.Model
              return department;
         }
 
+        // Helper methods to ensure address entities exist
         public static Address CheckAddressExists(Address address)
         {
             if (address != null)
@@ -77,6 +110,7 @@ namespace EmployeeManagementApp.Model
             }
             return address;
         }
+
 
     }
 }

@@ -11,9 +11,9 @@ public partial class EditEmployeePage : ContentPage
     public EditEmployeePage()
 	{
 		InitializeComponent();
-	}
+    }
 
-	public string EmployeeId
+    public string EmployeeId
 	{ 
 		set 
 		{
@@ -23,15 +23,12 @@ public partial class EditEmployeePage : ContentPage
 				employeeCtrl.firstName = employee.FirstName;
 				employeeCtrl.lastName = employee.LastName;
 				employeeCtrl.phoneNumber = employee.PhoneNumber;
+
                 var department = EmployeeRepository.GetDepartmentById(employee.DepartmentId);
-                if (department != null)
-                {
-                    employeeCtrl.department = department.DepartmentName;
-                }
-                else
-                {
-                    employeeCtrl.department = string.Empty;
-                }
+
+                employeeCtrl.department = department;
+
+                employeeCtrl.LoadDepartments(employeeCtrl.department);
 
                 var address = EmployeeRepository.GetAddressById(employee.AddressId);
 
@@ -61,8 +58,7 @@ public partial class EditEmployeePage : ContentPage
         employee.LastName = employeeCtrl.lastName;
 		employee.PhoneNumber = employeeCtrl.phoneNumber;
 
-        var department = new Department { DepartmentName = employeeCtrl.department };
-        department = EmployeeRepository.CheckDepartmentExists(department);
+        var department = employeeCtrl.department;
 
         var address = new Address
         {
@@ -75,7 +71,7 @@ public partial class EditEmployeePage : ContentPage
 
         address = EmployeeRepository.CheckAddressExists(address);
 
-        employee.DepartmentId = department.DepartmentId;
+        employee.DepartmentId = department.Id;
         employee.AddressId = address.AddressId;
 
         EmployeeRepository.UpdateEmployee(employee);
