@@ -125,7 +125,7 @@ public partial class EmployeeControl : ContentView
         pickerDepartments.ItemsSource = Departments;
         if (selectedDepartment != null)
         {
-            pickerDepartments.SelectedItem = selectedDepartment.DepartmentId;
+            pickerDepartments.SelectedItem = ((List<Department>)pickerDepartments.ItemsSource).FirstOrDefault(c => c.Id == selectedDepartment.Id);
             //selectedDepartmentLabel.Text = pickerDepartments.SelectedItem.ToString();
         }
         else
@@ -137,15 +137,15 @@ public partial class EmployeeControl : ContentView
 
     private void pickerDepartments_SelectedIndexChanged(object sender, EventArgs e)
     {
-        var picker = (Picker)sender;
-        //int selectedIndex = picker.SelectedIndex
-        if (picker.SelectedItem != null)
-        {
-            selectedDepartmentLabel.Text = $"Selected Department: {((Department)picker.SelectedItem).DepartmentName}";
-        }
-        else
-        {
-            selectedDepartmentLabel.Text = string.Empty;
-        }
+        //var picker = (Picker)sender;
+        ////int selectedIndex = picker.SelectedIndex
+        //if (picker.SelectedItem != null)
+        //{
+        //    selectedDepartmentLabel.Text = $"Department: {((Department)picker.SelectedItem).DepartmentName}";
+        //}
+        //else
+        //{
+        //    selectedDepartmentLabel.Text = string.Empty;
+        //}
     }
 }

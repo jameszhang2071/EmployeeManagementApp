@@ -12,7 +12,7 @@
                   Grid.Column="0"
             x:Name="listEmployees" 
             Background="Transparent"
-            SeparatorColor="Blue"
+            SeparatorColor="#262626"
             RowHeight="50"
             ItemSelected="listEmployeess_ItemSelected"
             ItemTapped="listEmployeess_ItemTapped"
@@ -20,19 +20,13 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding FullName}"
-                      Detail="{Binding PhoneNumber}"
+                              Detail="{Binding PhoneNumber}"
+                              TextColor="#262626"
                       >
                     </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="1"
-            Grid.Column="0"
-            x:Name="btnAdd"
-            Text="Add Employee"
-            Clicked="btnAdd_Clicked"
-            />
-
+        <Button Grid.Row="1" Grid.Column="0" x:Name="btnAdd" Text="Add Employee" Clicked="btnAdd_Clicked" BackgroundColor="#262626" FontSize="Medium"/>
     </Grid>
 </ContentPage>
